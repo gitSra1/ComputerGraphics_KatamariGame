@@ -1,14 +1,15 @@
-
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 
 let renderer, scene, camera;
-let ball, candies = [];
-let candiesRemaining;
+let ball, candies = [], marshmallows = [], chocolates = [], hersheys = [];
+let candiesRemaining, marshmallowRemaining, chocolateRemaining, hersheysRemaining;
 let score = 0;
 let gameOver = false;
-let object=[];
+let acceleration = 0.0005;
+let deceleration = 0.0002;
+
 // Score display element
 const scoreDisplay = document.createElement('div');
 scoreDisplay.textContent = 'Score: 0';
@@ -47,19 +48,102 @@ const addCandies = async () => {
 
     scene.add(candy);
     candies.push(candy);
-  //  objects.push(candy);
   }
 
-  candiesRemaining = candies.length; 
-  //objectsRemaining = objects.length;
+  candiesRemaining = candies.length;
 };
 
+const addMarshmallows = async () => {
+  // Load marshmallow model
+  const marshmallowModel = await load('./assets/marshamallow/scene.gltf');
 
+  // Get the size of the plane
+  const planeSize = 50; // Adjust as needed
+
+  // Create multiple instances of marshmallows
+  for (let i = 0; i < 50; i++) {
+    const marshmallow = marshmallowModel.clone();
+
+    // Randomize position within the plane boundaries
+    const x = Math.random() * planeSize - planeSize / 2;
+    const z = Math.random() * planeSize - planeSize / 2;
+    const y = 0;
+
+    marshmallow.position.set(x, y, z);
+
+    // Scale down the marshmallow
+    const scaleFactor = 0.5; // Adjust as needed
+    marshmallow.scale.set(scaleFactor, scaleFactor, scaleFactor);
+
+    scene.add(marshmallow);
+    marshmallows.push(marshmallow);
+  }
+
+  marshmallowRemaining = marshmallows.length;
+};
+
+const addChocolates = async () => {
+  // Load chocolate model
+  const chocolateModel = await load('./assets/chocolate/scene.gltf');
+
+  // Get the size of the plane
+  const planeSize = 50; // Adjust as needed
+
+  // Create multiple instances of chocolates
+  for (let i = 0; i < 50; i++) {
+    const chocolate = chocolateModel.clone();
+
+    // Randomize position within the plane boundaries
+    const x = Math.random() * planeSize - planeSize / 2;
+    const z = Math.random() * planeSize - planeSize / 2;
+    const y = 0;
+
+    chocolate.position.set(x, y, z);
+
+    // Scale down the chocolate
+    const scaleFactor = 0.3; // Adjust as needed
+    chocolate.scale.set(scaleFactor, scaleFactor, scaleFactor);
+
+    scene.add(chocolate);
+    chocolates.push(chocolate);
+  }
+
+  chocolateRemaining = chocolates.length;
+};
+
+const addHersheys = async () => {
+  // Load Hershey's model
+  const hersheysModel = await load('./assets/hersheys/scene.gltf');
+
+  // Get the size of the plane
+  const planeSize = 50; // Adjust as needed
+
+  // Create multiple instances of Hershey's
+  for (let i = 0; i < 50; i++) {
+    const hershey = hersheysModel.clone();
+
+    // Randomize position within the plane boundaries
+    const x = Math.random() * planeSize - planeSize / 2;
+    const z = Math.random() * planeSize - planeSize / 2;
+    const y = 0;
+
+    hershey.position.set(x, y, z);
+
+    // Scale down the Hershey's
+    const scaleFactor = 0.001; // Adjust as needed
+    hershey.scale.set(scaleFactor, scaleFactor, scaleFactor);
+
+    scene.add(hershey);
+    hersheys.push(hershey);
+  }
+
+  hersheysRemaining = hersheys.length;
+};
 
 window.init = async () => {
   renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setClearColor(0xfff0f5, 1); 
+  renderer.setClearColor(0xfff0f5, 1);
   document.body.appendChild(renderer.domElement);
 
   scene = new THREE.Scene();
@@ -68,58 +152,86 @@ window.init = async () => {
   const directionalLight = new THREE.DirectionalLight(0xadd8e6, 10);
   scene.add(directionalLight);
 
-  const geometry = new THREE.PlaneGeometry(50, 50);
+  const geometry = new THREE.PlaneGeometry(100, 100);
   const textureLoader = new THREE.TextureLoader();
-const texture = textureLoader.load('./assets/candyshapes.png'); 
-// Create material with texture
-const material = new THREE.MeshBasicMaterial({ map: texture });
+  const texture = textureLoader.load('./assets/candyshapes.png');
+  // Create material with texture
+  const material = new THREE.MeshBasicMaterial({ map: texture });
   const plane = new THREE.Mesh(geometry, material);
-  plane.rotateX(-Math.PI / 2); 
+  plane.rotateX(-Math.PI / 2);
   scene.add(plane);
 
   const axesHelper = new THREE.AxesHelper(5);
   scene.add(axesHelper);
 
-  ball = await load('./assets/raspberry_cell_gumball/scene.gltf');
-  ball.position.y += 1.5; 
-  ball.scale.set(1.0, 1.0, 1.0); 
+  ball = await load('./assets/christmasball/scene.gltf');
+  ball.position.y += 1.5;
+  ball.scale.set(1.0, 1.0, 1.0);
   scene.add(ball);
 
+  // Initialize velocity vector here
+  ball.velocity = new THREE.Vector3(0, 0, 0);
+
   await addCandies();
-  console.log('made a scene', ball);
+  await addMarshmallows();
+  await addChocolates();
+  await addHersheys();
 };
 
 window.loop = (dt, input) => {
-  if (ball && !gameOver) {
-    const movementSpeed = 0.006; 
+  // Check if the ball and its velocity are defined
+  if (ball && ball.velocity && !gameOver) {
+    const movementSpeed = 0.004;
     const rotationSpeed = 0.5;
+    const rollingSpeed = 0.1; // Adjust rolling speed as needed
 
-    // Forward and backward movement - along the Z-axis
-    if (input.keys.has('ArrowUp')) {
-      ball.position.z -= movementSpeed * dt;
-      ball.rotation.y += rotationSpeed * dt;
-    }
-    if (input.keys.has('ArrowDown')) {
-      ball.position.z += movementSpeed * dt;
-      ball.rotation.y += rotationSpeed * dt;
+    // Check arrow key inputs
+    const keysPressed = {
+      ArrowUp: input.keys.has('ArrowUp'),
+      ArrowDown: input.keys.has('ArrowDown'),
+      ArrowLeft: input.keys.has('ArrowLeft'),
+      ArrowRight: input.keys.has('ArrowRight')
+    };
+
+    // Accelerate or decelerate based on key inputs
+    if (keysPressed.ArrowUp || keysPressed.ArrowDown || keysPressed.ArrowLeft || keysPressed.ArrowRight) {
+      // Accelerate
+      ball.velocity.x += acceleration * dt * (keysPressed.ArrowRight - keysPressed.ArrowLeft);
+      ball.velocity.z += acceleration * dt * (keysPressed.ArrowDown - keysPressed.ArrowUp);
+    } else {
+      // Decelerate
+      const decelerationVector = ball.velocity.clone().normalize().multiplyScalar(-deceleration * dt);
+      ball.velocity.add(decelerationVector);
+
+      // Clamp velocity to zero when close to stopping
+      if (Math.abs(ball.velocity.x) < deceleration * dt) {
+        ball.velocity.x = 0;
+      }
+      if (Math.abs(ball.velocity.z) < deceleration * dt) {
+        ball.velocity.z = 0;
+      }
     }
 
-    // Left and right movement - along the X-axis
-    if (input.keys.has('ArrowLeft')) {
-      ball.position.x -= movementSpeed * dt;
-      ball.rotation.y += rotationSpeed * dt;
-    }
-    if (input.keys.has('ArrowRight')) {
-      ball.position.x += movementSpeed * dt;
-      ball.rotation.y += rotationSpeed * dt;
-    }
-    const planeBoundaryX = 50 / 2; // half the width
-    const planeBoundaryZ = 50 / 2; // half the depth
+    // Apply velocity to position
+    ball.position.x += ball.velocity.x;
+    ball.position.z += ball.velocity.z;
+
+    // Clamp ball position within boundaries
+    const planeBoundaryX = 100 / 2.05;
+    const planeBoundaryZ = 100 / 2.05;
     ball.position.x = Math.max(-planeBoundaryX, Math.min(planeBoundaryX, ball.position.x));
     ball.position.z = Math.max(-planeBoundaryZ, Math.min(planeBoundaryZ, ball.position.z));
 
+    // Update rotation only if arrow keys are pressed
+    if (keysPressed.ArrowUp || keysPressed.ArrowDown || keysPressed.ArrowLeft || keysPressed.ArrowRight) {
+      ball.rotation.y += rotationSpeed * dt;
+
+      // Roll the ball around its forward axis (X-axis) based on movement direction
+      ball.rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), ball.velocity.x * rollingSpeed * dt);
+    }
+
     // Update camera position to focus on the ball
-    const cameraOffset = new THREE.Vector3(0, 10, 20); 
+    const cameraOffset = new THREE.Vector3(0, 10, 20);
     const ballPosition = ball.position.clone().add(cameraOffset);
     camera.position.copy(ballPosition);
     camera.lookAt(ball.position);
@@ -133,25 +245,100 @@ window.loop = (dt, input) => {
         candiesRemaining--;
         score++; // Increment score when candy is touched
         scoreDisplay.textContent = `Score: ${score}`; // Update score display
-        if (candiesRemaining === 0) {
-          // If all candies are removed, display game over message
+        if (candiesRemaining === 0 && marshmallowRemaining === 0 && chocolateRemaining === 0 && hersheysRemaining === 0) {
+          // If all items are collected, display game over message
           const gameOverMessage = document.createElement('div');
-          gameOverMessage.textContent = `Game Over. Score: ${score}`;
+          gameOverMessage.textContent = `Congratulations! You collected all items. Final Score: ${score}`;
           gameOverMessage.style.position = 'absolute';
           gameOverMessage.style.top = '50%';
           gameOverMessage.style.left = '50%';
           gameOverMessage.style.transform = 'translate(-50%, -50%)';
           gameOverMessage.style.fontSize = '24px';
-          gameOverMessage.style.color = 'red';
+          gameOverMessage.style.color = 'green';
           document.body.appendChild(gameOverMessage);
           gameOver = true; // Set game over flag
         }
       }
     });
-  }
 
-  // Render the scene
-  renderer.render(scene, camera);
+    // Check collision with marshmallows
+    marshmallows.forEach((marshmallow, index) => {
+      if (ball.position.distanceTo(marshmallow.position) < 2) {
+        // If the ball touches the marshmallow, remove the marshmallow from the scene
+        scene.remove(marshmallow);
+        marshmallows.splice(index, 1); // Remove marshmallow from marshmallows array
+        marshmallowRemaining--;
+        score++; // Increment score when marshmallow is touched
+        scoreDisplay.textContent = `Score: ${score}`; // Update score display
+        if (candiesRemaining === 0 && marshmallowRemaining === 0 && chocolateRemaining === 0 && hersheysRemaining === 0) {
+          // If all items are collected, display game over message
+          const gameOverMessage = document.createElement('div');
+          gameOverMessage.textContent = `Congratulations! You collected all items. Final Score: ${score}`;
+          gameOverMessage.style.position = 'absolute';
+          gameOverMessage.style.top = '50%';
+          gameOverMessage.style.left = '50%';
+          gameOverMessage.style.transform = 'translate(-50%, -50%)';
+          gameOverMessage.style.fontSize = '24px';
+          gameOverMessage.style.color = 'green';
+          document.body.appendChild(gameOverMessage);
+          gameOver = true; // Set game over flag
+        }
+      }
+    });
+
+    // Check collision with chocolates
+    chocolates.forEach((chocolate, index) => {
+      if (ball.position.distanceTo(chocolate.position) < 2) {
+        // If the ball touches the chocolate, remove the chocolate from the scene
+        scene.remove(chocolate);
+        chocolates.splice(index, 1); // Remove chocolate from chocolates array
+        chocolateRemaining--;
+        score++; // Increment score when chocolate is touched
+        scoreDisplay.textContent = `Score: ${score}`; // Update score display
+        if (candiesRemaining === 0 && marshmallowRemaining === 0 && chocolateRemaining === 0 && hersheysRemaining === 0) {
+          // If all items are collected, display game over message
+          const gameOverMessage = document.createElement('div');
+          gameOverMessage.textContent = `Congratulations! You collected all items. Final Score: ${score}`;
+          gameOverMessage.style.position = 'absolute';
+          gameOverMessage.style.top = '50%';
+          gameOverMessage.style.left = '50%';
+          gameOverMessage.style.transform = 'translate(-50%, -50%)';
+          gameOverMessage.style.fontSize = '24px';
+          gameOverMessage.style.color = 'green';
+          document.body.appendChild(gameOverMessage);
+          gameOver = true; // Set game over flag
+        }
+      }
+    });
+
+    // Check collision with Hershey's
+    hersheys.forEach((hershey, index) => {
+      if (ball.position.distanceTo(hershey.position) < 2) {
+        // If the ball touches the Hershey's, remove it from the scene
+        scene.remove(hershey);
+        hersheys.splice(index, 1); // Remove Hershey's from hersheys array
+        hersheysRemaining--;
+        score += 2; // Increment score when Hershey's is touched (double score)
+        scoreDisplay.textContent = `Score: ${score}`; // Update score display
+        if (candiesRemaining === 0 && marshmallowRemaining === 0 && chocolateRemaining === 0 && hersheysRemaining === 0) {
+          // If all items are collected, display game over message
+          const gameOverMessage = document.createElement('div');
+          gameOverMessage.textContent = `Congratulations! You collected all items. Final Score: ${score}`;
+          gameOverMessage.style.position = 'absolute';
+          gameOverMessage.style.top = '50%';
+          gameOverMessage.style.left = '50%';
+          gameOverMessage.style.transform = 'translate(-50%, -50%)';
+          gameOverMessage.style.fontSize = '24px';
+          gameOverMessage.style.color = 'green';
+          document.body.appendChild(gameOverMessage);
+          gameOver = true; // Set game over flag
+        }
+      }
+    });
+
+    // Render the scene
+    renderer.render(scene, camera);
+  }
 };
 
 // Function to handle arrow key down events

@@ -1,0 +1,11 @@
+Model Information:
+* title:	Hershey's Chocolate Bar Unwrapped
+* source:	https://sketchfab.com/3d-models/hersheys-chocolate-bar-unwrapped-32e0201d12be42b3b15557f2f576ea3e
+* author:	Anthony Yanez (https://sketchfab.com/paulyanez)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Hershey's Chocolate Bar Unwrapped" (https://sketchfab.com/3d-models/hersheys-chocolate-bar-unwrapped-32e0201d12be42b3b15557f2f576ea3e) by Anthony Yanez (https://sketchfab.com/paulyanez) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

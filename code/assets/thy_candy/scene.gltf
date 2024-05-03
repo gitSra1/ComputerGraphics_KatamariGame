@@ -1,0 +1,430 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 12513,
+      "max": [
+        11.583001136779785,
+        7.873501777648926,
+        4.153825283050537
+      ],
+      "min": [
+        -11.074640274047852,
+        -0.09981606155633926,
+        -4.1066999435424805
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 150156,
+      "componentType": 5126,
+      "count": 12513,
+      "max": [
+        0.9994945526123047,
+        0.9999691247940063,
+        0.9999712705612183
+      ],
+      "min": [
+        -0.9997892379760742,
+        -0.9999881982803345,
+        -0.9998469948768616
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 12513,
+      "max": [
+        1.0,
+        0.9993934035301208,
+        0.99937504529953,
+        1.0
+      ],
+      "min": [
+        -0.1817588359117508,
+        -0.9997365474700928,
+        -0.9923048615455627,
+        -1.0
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 12513,
+      "max": [
+        0.9968751072883606,
+        0.8750000596046448
+      ],
+      "min": [
+        0.0031249187886714935,
+        0.12499995529651642
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 73728,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 300312,
+      "componentType": 5126,
+      "count": 1583,
+      "max": [
+        5.917646884918213,
+        2.9971468448638916,
+        3.250049352645874
+      ],
+      "min": [
+        -5.7880377769470215,
+        -2.9658713340759277,
+        -3.2401556968688965
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 319308,
+      "componentType": 5126,
+      "count": 1583,
+      "max": [
+        0.9917024970054626,
+        0.9999004602432251,
+        0.9999809861183167
+      ],
+      "min": [
+        -0.9975219368934631,
+        -0.9997127652168274,
+        -0.9998388290405273
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 200208,
+      "componentType": 5126,
+      "count": 1583,
+      "max": [
+        0.999998152256012,
+        0.9498445391654968,
+        0.9780468940734863,
+        1.0
+      ],
+      "min": [
+        -0.8833581209182739,
+        -0.9508177638053894,
+        -0.9867530465126038,
+        1.0
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 100104,
+      "componentType": 5126,
+      "count": 1583,
+      "max": [
+        0.9398468732833862,
+        0.9817256927490234
+      ],
+      "min": [
+        0.06015309691429138,
+        0.01827433705329895
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 294912,
+      "componentType": 5125,
+      "count": 9216,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "art_em (https://sketchfab.com/art_em)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/thy-candy-f63a19caad054232bada31bf9dda010b",
+      "title": "Thy Candy"
+    },
+    "generator": "Sketchfab-12.82.3",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 331776,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 112768,
+      "byteOffset": 331776,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 338304,
+      "byteOffset": 444544,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 225536,
+      "byteOffset": 782848,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 1008384,
+      "uri": "scene.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "textures/aiStandardSurface1_baseColor.jpeg"
+    },
+    {
+      "uri": "textures/aiStandardSurface1_normal.png"
+    },
+    {
+      "uri": "textures/aiStandardSurface2_baseColor.jpeg"
+    },
+    {
+      "uri": "textures/aiStandardSurface2_normal.png"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "aiStandardSurface1",
+      "normalTexture": {
+        "index": 1,
+        "scale": 0.6
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "roughnessFactor": 0.15
+      }
+    },
+    {
+      "name": "aiStandardSurface2",
+      "normalTexture": {
+        "index": 3,
+        "scale": 0.501714939
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 2
+        },
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.1846417683
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "candy_cover_aiStandardSurface1_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3
+          },
+          "indices": 4,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "candy_swirl_sculpted_aiStandardSurface2_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 6,
+            "POSITION": 5,
+            "TANGENT": 7,
+            "TEXCOORD_0": 8
+          },
+          "indices": 9,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "e022181240ef41789c38ce7b8de30451.fbx"
+    },
+    {
+      "children": [
+        3
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        4,
+        6
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.8640490174293518,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.528641939163208,
+        0.0,
+        1.0
+      ],
+      "name": "Candy1"
+    },
+    {
+      "children": [
+        5
+      ],
+      "name": "candy_cover"
+    },
+    {
+      "mesh": 0,
+      "name": "candy_cover_aiStandardSurface1_0"
+    },
+    {
+      "children": [
+        7
+      ],
+      "matrix": [
+        1.149999976158142,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0157281160354614,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.9364224672317505,
+        0.0,
+        -0.11918308585882187,
+        3.296107053756714,
+        0.02500000037252903,
+        1.0
+      ],
+      "name": "candy_swirl_sculpted"
+    },
+    {
+      "mesh": 1,
+      "name": "candy_swirl_sculpted_aiStandardSurface2_0"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    },
+    {
+      "sampler": 0,
+      "source": 3
+    }
+  ]
+}
