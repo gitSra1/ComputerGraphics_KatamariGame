@@ -29,7 +29,7 @@ const addCandies = async () => {
   const candyModel = await load('./assets/candy/scene.gltf');
 
   // Get the size of the plane
-  const planeSize = 49; // Adjust as needed
+  const planeSize = 47; // Adjust as needed
 
   // Create multiple instances of candies
   for (let i = 0; i < 50; i++) {
@@ -58,7 +58,7 @@ const addMarshmallows = async () => {
   const marshmallowModel = await load('./assets/marshamallow/scene.gltf');
 
   // Get the size of the plane
-  const planeSize = 49; // Adjust as needed
+  const planeSize = 47; // Adjust as needed
 
   // Create multiple instances of marshmallows
   for (let i = 0; i < 50; i++) {
@@ -87,7 +87,7 @@ const addChocolates = async () => {
   const chocolateModel = await load('./assets/chocolate/scene.gltf');
 
   // Get the size of the plane
-  const planeSize = 49; // Adjust as needed
+  const planeSize = 47; // Adjust as needed
 
   // Create multiple instances of chocolates
   for (let i = 0; i < 50; i++) {
@@ -116,7 +116,7 @@ const addHersheys = async () => {
   const hersheysModel = await load('./assets/hersheys/scene.gltf');
 
   // Get the size of the plane
-  const planeSize = 49; // Adjust as needed
+  const planeSize = 47; // Adjust as needed
 
   // Create multiple instances of Hershey's
   for (let i = 0; i < 50; i++) {
@@ -144,7 +144,7 @@ const addiceCream = async () => {
   const icecreamModel = await load('./assets/icecream/scene.gltf');
 
   // Get the size of the plane
-  const planeSize = 49; // Adjust as needed
+  const planeSize = 47; // Adjust as needed
 
   // Create multiple instances of marshmallows
   for (let i = 0; i < 50; i++) {
@@ -212,8 +212,8 @@ window.loop = (dt, input) => {
   // Check if the ball and its velocity are defined
   if (ball && ball.velocity && !gameOver) {
     const movementSpeed = 0.004;
-    const rotationSpeed = 0.5;
-    const rollingSpeed = 0.1; // Adjust rolling speed as needed
+    const rotationSpeed = 0.2;
+    const rollingSpeed = 0.05; // Adjust rolling speed as needed
 
     // Check arrow key inputs
     const keysPressed = {
@@ -259,17 +259,31 @@ window.loop = (dt, input) => {
       // Roll the ball around its forward axis (X-axis) based on movement direction
       ball.rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), ball.velocity.x * rollingSpeed * dt);
     }
-
+    if (ball.velocity.length() > 0.01) { // Check if the ball has significant velocity
+      const rotationAxis = new THREE.Vector3(0, 1, 0).cross(ball.velocity.clone().normalize()); // Axis perpendicular to velocity
+      const rotationAngle = ball.velocity.length() * dt * rollingSpeed; // Angle based on speed and time
+  
+      const rotationQuaternion = new THREE.Quaternion().setFromAxisAngle(rotationAxis, rotationAngle);
+      ball.quaternion.multiply(rotationQuaternion); // Update ball's rotation 
+  }
     // Update camera position to focus on the ball
     const cameraOffset = new THREE.Vector3(0, 10, 20);
     const ballPosition = ball.position.clone().add(cameraOffset);
     camera.position.copy(ballPosition);
     camera.lookAt(ball.position);
+    const sound = new Audio('./assets/bonus-points-190035.mp3');
 
+    // Function to play the sound effect
+    const playSound = () => {
+      sound.currentTime = 0; // Reset the sound to the beginning
+      sound.play(); // Play the sound
+    };
+    
     // Check collision with candies
     candies.forEach((candy, index) => {
       if (ball.position.distanceTo(candy.position) < 2) {
         // If the ball touches the candy, remove the candy from the scene
+        playSound();
         ball.attach(candy);
         scene.remove(candy);
         candies.splice(index, 1); // Remove candy from candies array
@@ -296,6 +310,7 @@ window.loop = (dt, input) => {
     marshmallows.forEach((marshmallow, index) => {
       if (ball.position.distanceTo(marshmallow.position) < 2) {
         // If the ball touches the marshmallow, remove the marshmallow from the scene
+        playSound();
         ball.attach(marshmallow);
         scene.remove(marshmallow);
         marshmallows.splice(index, 1); // Remove marshmallow from marshmallows array
@@ -322,6 +337,7 @@ window.loop = (dt, input) => {
     chocolates.forEach((chocolate, index) => {
       if (ball.position.distanceTo(chocolate.position) < 2) {
         // If the ball touches the chocolate, remove the chocolate from the scene
+        playSound();
         ball.attach(chocolate);
         scene.remove(chocolate);
         chocolates.splice(index, 1); // Remove chocolate from chocolates array
@@ -348,6 +364,7 @@ window.loop = (dt, input) => {
     hersheys.forEach((hershey, index) => {
       if (ball.position.distanceTo(hershey.position) < 2) {
         // If the ball touches the Hershey's, remove it from the scene
+        playSound();
         ball.attach(hershey);
         scene.remove(hershey);
         hersheys.splice(index, 1); // Remove Hershey's from hersheys array
@@ -372,6 +389,7 @@ window.loop = (dt, input) => {
     icecreams.forEach((icecream, index) => {
       if (ball.position.distanceTo(icecream.position) < 2) {
         // If the ball touches the chocolate, remove the chocolate from the scene
+        playSound();
         ball.attach(icecream);
         scene.remove(icecream);
         icecreams.splice(index, 1); // Remove chocolate from chocolates array
