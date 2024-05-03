@@ -193,7 +193,7 @@ window.init = async () => {
   const axesHelper = new THREE.AxesHelper(5);
   scene.add(axesHelper);
 
-  ball = await load('./assets/christmasball/scene.gltf');
+  ball = await load('./assets/pumpkin/scene.gltf');
   ball.position.y += 1.5;
   ball.scale.set(1.0, 1.0, 1.0);
   scene.add(ball);
