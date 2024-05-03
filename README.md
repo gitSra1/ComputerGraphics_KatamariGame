@@ -4,7 +4,7 @@
 # Halloween Candy Hunt
 <h6> Play with sound</h6>
 
-<img src ='https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.timesnownews.com%2Flifestyle%2Ffood%2Fnews%2Fthe-significance-of-pumpkin-on-halloween-article-104827206&psig=AOvVaw3Vqr9Fg_GPcWwNPRFIZklA&ust=1714799820312000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCMCY-aPd8IUDFQAAAAAdAAAAABAE'>
+<img src ='https://static.tnn.in/thumb/msid-104827238,thumbsize-42168,width-1280,height-720,resizemode-75/104827238.jpg'>
 Team Members
 
 Swathi Reddy Sampath
