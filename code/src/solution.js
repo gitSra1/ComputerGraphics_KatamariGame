@@ -254,7 +254,7 @@ window.loop = (dt, input) => {
 
     // Update rotation only if arrow keys are pressed
     if (keysPressed.ArrowUp || keysPressed.ArrowDown || keysPressed.ArrowLeft || keysPressed.ArrowRight) {
-      ball.rotation.y += rotationSpeed * dt;
+      //ball.rotation.y += rotationSpeed * dt;
 
       // Roll the ball around its forward axis (X-axis) based on movement direction
       ball.rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), ball.velocity.x * rollingSpeed * dt);
@@ -276,7 +276,7 @@ window.loop = (dt, input) => {
         candiesRemaining--;
         score++; // Increment score when candy is touched
         scoreDisplay.textContent = `Score: ${score}`; // Update score display
-        if (candiesRemaining === 0 && marshmallowRemaining === 0 && chocolateRemaining === 0 && hersheysRemaining === 0) {
+        if (candiesRemaining === 0 && marshmallowRemaining === 0 && chocolateRemaining === 0 && hersheysRemaining === 0 && icecreamRemaining===0) {
           // If all items are collected, display game over message
           const gameOverMessage = document.createElement('div');
           gameOverMessage.textContent = `Congratulations! You collected all items. Final Score: ${score}`;
@@ -302,7 +302,7 @@ window.loop = (dt, input) => {
         marshmallowRemaining--;
         score++; // Increment score when marshmallow is touched
         scoreDisplay.textContent = `Score: ${score}`; // Update score display
-        if (candiesRemaining === 0 && marshmallowRemaining === 0 && chocolateRemaining === 0 && hersheysRemaining === 0) {
+        if (candiesRemaining === 0 && marshmallowRemaining === 0 && chocolateRemaining === 0 && hersheysRemaining === 0 && icecreamRemaining===0) {
           // If all items are collected, display game over message
           const gameOverMessage = document.createElement('div');
           gameOverMessage.textContent = `Congratulations! You collected all items. Final Score: ${score}`;
@@ -328,7 +328,7 @@ window.loop = (dt, input) => {
         chocolateRemaining--;
         score++; // Increment score when chocolate is touched
         scoreDisplay.textContent = `Score: ${score}`; // Update score display
-        if (candiesRemaining === 0 && marshmallowRemaining === 0 && chocolateRemaining === 0 && hersheysRemaining === 0) {
+        if (candiesRemaining === 0 && marshmallowRemaining === 0 && chocolateRemaining === 0 && hersheysRemaining === 0 && icecreamRemaining===0) {
           // If all items are collected, display game over message
           const gameOverMessage = document.createElement('div');
           gameOverMessage.textContent = `Congratulations! You collected all items. Final Score: ${score}`;
@@ -354,7 +354,7 @@ window.loop = (dt, input) => {
         hersheysRemaining--;
         score += 2; // Increment score when Hershey's is touched (double score)
         scoreDisplay.textContent = `Score: ${score}`; // Update score display
-        if (candiesRemaining === 0 && marshmallowRemaining === 0 && chocolateRemaining === 0 && hersheysRemaining === 0) {
+        if (candiesRemaining === 0 && marshmallowRemaining === 0 && chocolateRemaining === 0 && hersheysRemaining === 0 && icecreamRemaining===0) {
           // If all items are collected, display game over message
           const gameOverMessage = document.createElement('div');
           gameOverMessage.textContent = `Congratulations! You collected all items. Final Score: ${score}`;
